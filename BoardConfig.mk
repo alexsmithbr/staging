@@ -20,7 +20,7 @@
 # definition file).
 #
 
-TARGET_OTA_ASSERT_DEVICE := x1
+TARGET_OTA_ASSERT_DEVICE := max1
 
 BOARD_VENDOR := letv
 BOARD_USES_LINEAGE_HARDWARE := true
@@ -66,7 +66,7 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 BOARD_MKBOOTIMG_ARGS := --tags_offset 0x00000100
 #TARGET_CUSTOM_DTBTOOL := dtbToolV3
 TARGET_KERNEL_SOURCE := kernel/letv/msm8994
-TARGET_KERNEL_CONFIG := msm8994-x1na-perf_defconfig
+TARGET_KERNEL_CONFIG := msm8994alex-perf_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 
@@ -104,7 +104,7 @@ AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_HAS_QCA_BT_ROME := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/letv/x1/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/letv/max1/bluetooth
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
@@ -114,7 +114,7 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # GPS
 TARGET_NO_RPC := true
-TARGET_GPS_HAL_PATH := device/letv/x1/gps
+TARGET_GPS_HAL_PATH := device/letv/max1/gps
 
 # Graphics
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
@@ -133,7 +133,7 @@ OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
 TARGET_UNIFIED_DEVICE := true
 TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_LIBINIT_DEFINES_FILE := device/letv/x1/init/init_x1.c
+TARGET_LIBINIT_DEFINES_FILE := device/letv/max1/init/init_max1.c
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 # Ril
@@ -184,12 +184,12 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/letv/x1/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/letv/max1/rootdir/etc/fstab.qcom
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += device/letv/x1/sepolicy
+BOARD_SEPOLICY_DIRS += device/letv/max1/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     adspd.te \
@@ -230,4 +230,4 @@ BOARD_SEPOLICY_UNION += \
 BOARD_USES_QC_TIME_SERVICES := true
 
 # inherit from the proprietary version
--include vendor/letv/x1/BoardConfigVendor.mk
+-include vendor/letv/max1/BoardConfigVendor.mk

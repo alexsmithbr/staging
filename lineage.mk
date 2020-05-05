@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, device/letv/x1/full_x1.mk)
+$(call inherit-product, device/letv/max1/full_max1.mk)
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+# Inherit some common Lineage stuff.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-# Inherit x1-specific vendor tree
-$(call inherit-product-if-exists, vendor/letv/x1/x1-vendor.mk)
+# Inherit max1-specific vendor tree
+$(call inherit-product-if-exists, vendor/letv/max1/max1-vendor.mk)

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEVICE=x1
+DEVICE=max1
 VENDOR=letv
 
 OUTDIR=vendor/$VENDOR/$DEVICE

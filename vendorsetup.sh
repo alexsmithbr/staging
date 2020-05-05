@@ -1,3 +1,3 @@
-add_lunch_combo cm_x1-user
-add_lunch_combo cm_x1-userdebug
-add_lunch_combo cm_x1-eng
+add_lunch_combo lineage_max1-user
+add_lunch_combo lineage_max1-userdebug
+add_lunch_combo lineage_max1-eng

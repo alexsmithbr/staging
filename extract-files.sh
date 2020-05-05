@@ -3,7 +3,7 @@
 set -e
 
 export VENDOR=letv
-export DEVICE=x1
+export DEVICE=max1
 
 function extract() {
     for FILE in `egrep -v '(^#|^$)' $1`; do

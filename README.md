@@ -1,2 +1,2 @@
-# android_device_letv_x1
-CM
+# android_device_letv_max1
+Lineage
