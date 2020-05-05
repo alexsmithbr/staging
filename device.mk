@@ -63,9 +63,9 @@ PRODUCT_PACKAGES += \
 
 # Keyhandler
 PRODUCT_PACKAGES += \
-    com.cyanogenmod.keyhandler
+    com.lineageos.keyhandler
 
-PRODUCT_SYSTEM_SERVER_JARS += com.cyanogenmod.keyhandler
+PRODUCT_SYSTEM_SERVER_JARS += com.lineageos.keyhandler
 
 # Permissions
 PRODUCT_COPY_FILES += \

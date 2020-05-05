@@ -23,8 +23,8 @@
 TARGET_OTA_ASSERT_DEVICE := x1
 
 BOARD_VENDOR := letv
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS += hardware/cyanogen/cmhw
+BOARD_USES_LINEAGE_HARDWARE := true
+BOARD_HARDWARE_CLASS += hardware/lineage/lineagehw
 TARGET_POWERHAL_VARIANT := qcom
 
 # Bootloader
