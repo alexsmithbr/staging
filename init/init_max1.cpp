@@ -29,10 +29,11 @@
  */
 #include <android-base/logging.h>
 #include <android-base/properties.h>
+#include <android-base/file.h>
+#include <android-base/strings.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 #include <sys/sysinfo.h>
-
 #include "property_service.h"
 #include "vendor_init.h"
 
@@ -44,34 +45,6 @@ using android::init::property_set;
 #define PANEL "mdss_mdp.panel"
 #define PRODUCT "android.letv.product"
 #define SERIALNO "androidboot.serialno"
-
-static void import_cmdline(char *name, int for_emulator)
-{
-    char *value = strchr(name, '=');
-    int name_len = strlen(name);
-
-    if (value == 0) return;
-    *value++ = 0;
-    if (name_len == 0) return;
-
-    if (!strcmp(name, BASEBAND)) {
-        property_set("ro.boot.baseband", value);
-        property_set("ro.baseband", value);
-    } else if (!strcmp(name, BOOTDEVICE))
-        property_set("ro.boot.bootdevice", value);
-    else if (!strcmp(name, HWVER))
-        property_set("ro.config.hardware_version", value);
-    else if (!strcmp(name, PANEL))
-        return; /* not sure what to do here */
-    else if (!strcmp(name, PRODUCT)) {
-        property_set("ro.config.product", value);
-        property_set("ro.product.model", value);
-        property_set("ro.product.device", value);
-    } else if (!strcmp(name, SERIALNO)) {
-        property_set("ro.boot.serialno", value);
-        property_set("ro.serialno", value);
-    }
-}
 
 void property_override(char const prop[], char const value[])
 {
@@ -91,8 +64,40 @@ void property_override_dual(char const system_prop[], char const vendor_prop[], 
 }
 
 void vendor_load_properties() {
+    struct sysinfo sys;
 
-    import_kernel_cmdline(0, import_cmdline);
+    std::string cmdline;
+
+    std::string key;
+    std::string value;
+
+    android::base::ReadFileToString("/proc/cmdline", &cmdline);
+    for (const auto& entry : android::base::Split(android::base::Trim(cmdline), " ")) {
+        std::vector<std::string> pieces = android::base::Split(entry, "=");
+        if (pieces.size() == 2) {
+            key = pieces[0];
+            value = pieces[1];
+
+            if ( key == BASEBAND ) {
+                property_set("ro.boot.baseband", value);
+                property_set("ro.baseband", value);
+            } else if ( key == BOOTDEVICE )
+                property_set("ro.boot.bootdevice", value);
+            else if ( key == HWVER )
+                property_set("ro.config.hardware_version", value);
+            /* not sure what to do here */
+            //else if ( key == PANEL )
+            //    return;
+            else if ( key == PRODUCT ) {
+                property_set("ro.config.product", value);
+                property_set("ro.product.model", value);
+                property_set("ro.product.device", value);
+            } else if ( key == SERIALNO ) {
+                property_set("ro.boot.serialno", value);
+                property_set("ro.serialno", value);
+            }
+        }
+    }    
 
     /* America */
     /* TODO: Parse these from kernel command line */
