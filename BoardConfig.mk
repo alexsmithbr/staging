@@ -20,7 +20,7 @@
 # definition file).
 #
 
-TARGET_OTA_ASSERT_DEVICE := max1
+TARGET_OTA_ASSERT_DEVICE := max1,Max1,x900,X900
 
 BOARD_VENDOR := letv
 BOARD_USES_LINEAGE_HARDWARE := true
@@ -55,7 +55,11 @@ TARGET_CPU_CORTEX_A53 := true
 TARGET_USES_64_BIT_BINDER := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 boot_cpus=0-5
+# This is in case we want more memory for ramoops
+#BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 boot_cpus=0-5 mem=3G ramoops.mem_address=0xc0000001 ramoops.mem_size=0x00f00000 ramoops.dump_oops=1 ramoops.ecc=1 buildvariant=userdebug
+# This is compatible with our current twrp recovery
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 boot_cpus=0-5 mem=3G ramoops.mem_address=0xc0000000 ramoops.mem_size=0x00100000 ramoops.dump_oops=1 ramoops.ecc=1 buildvariant=userdebug
+ramoops.mem_address=0xc0000000 ramoops.mem_size=0x00100000
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DT := true
@@ -66,9 +70,11 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 BOARD_MKBOOTIMG_ARGS := --tags_offset 0x00000100
 #TARGET_CUSTOM_DTBTOOL := dtbToolV3
 TARGET_KERNEL_SOURCE := kernel/letv/msm8994
-TARGET_KERNEL_CONFIG := msm8994alex-perf_defconfig
+TARGET_KERNEL_CONFIG := max1-perf_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := true
+# See: https://www.reddit.com/r/LineageOS/comments/9zizqz/how_to_enable_early_mount_for_devices_when_their/
+# BOARD_BOOTIMG_HEADER_VERSION := 0
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -193,6 +199,11 @@ BOARD_SEPOLICY_DIRS += device/letv/max1/sepolicy
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
+
+# twrp
+# Remember to https://github.com/TeamWin/android_bootable_recovery.git <lineage>/bootable/recovery
+TW_USE_TOOLBOX := true
+TW_THEME := portrait_hdpi
 
 # inherit from the proprietary version
 -include vendor/letv/max1/BoardConfigVendor.mk
